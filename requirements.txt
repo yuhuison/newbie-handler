@@ -1,5 +1,4 @@
 runpod
-torch
 modelscope
 diffusers
 transformers
