@@ -13,9 +13,14 @@ pipe = NewbiePipeline.from_pretrained(
 
 print("Model loaded.")
 
-def handler(job):
-    job_input = job["input"]
-    prompt = job_input.get("prompt", "1girl")
+def handler(event):
+    print("Worker Start")
+    input = event['input']
+    
+    prompt = input.get('prompt', '1girl')
+    
+    print(f"Received prompt: {prompt}")
+    print("Generating image...")
 
     image = pipe(
         prompt,
@@ -31,4 +36,5 @@ def handler(job):
         "image": base64.b64encode(buf.getvalue()).decode()
     }
 
-runpod.serverless.start({"handler": handler})
+if __name__ == '__main__':
+    runpod.serverless.start({'handler': handler})
