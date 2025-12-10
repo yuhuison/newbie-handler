@@ -1,3 +1,4 @@
+import runpod
 import torch
 from modelscope import NewbiePipeline
 from io import BytesIO
@@ -12,8 +13,9 @@ pipe = NewbiePipeline.from_pretrained(
 
 print("Model loaded.")
 
-def handler(event):
-    prompt = event["input"].get("prompt", "1girl")
+def handler(job):
+    job_input = job["input"]
+    prompt = job_input.get("prompt", "1girl")
 
     image = pipe(
         prompt,
@@ -28,3 +30,5 @@ def handler(event):
     return {
         "image": base64.b64encode(buf.getvalue()).decode()
     }
+
+runpod.serverless.start({"handler": handler})
