@@ -1,13 +1,13 @@
 import runpod
 import torch
-from modelscope import NewbiePipeline
+from diffusers import NewbiePipeline
 from io import BytesIO
 import base64
 
 print("Loading model...")
 
 pipe = NewbiePipeline.from_pretrained(
-    "NewBieAi-lab/NewBie-image-Exp0.1",
+    "NewBie-AI/NewBie-image-Exp0.1",
     torch_dtype=torch.bfloat16,
 ).to("cuda")
 
