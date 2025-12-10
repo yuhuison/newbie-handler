@@ -1,0 +1,7 @@
+torch
+modelscope
+diffusers
+transformers
+accelerate
+safetensors
+pillow
